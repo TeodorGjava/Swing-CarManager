@@ -8,8 +8,10 @@ public class Main {
        // Car car = new Car("Porsche", "911Turbo");
       //  addCarToDatabase(car);
       CarEvent event = new CarEvent(1, "2022/01/03", "Смяна на масло и филтри", 120445, "05143462/03/01/2022", "АЛКАРС", 965.5);
+      CarEvent event2 = new CarEvent(1, "2022/06/03", "Смяна  филтри", 13512, "05143432/03/05/2022", "АЛКАРС", 975.5);
       //  car.addEvent(event);
         addEventToDatabase(event);
+        addEventToDatabase(event2);
 
     }
 
