@@ -13,6 +13,9 @@ public class Car {
         setModel(model);
         this.eventList = new ArrayList<>();
     }
+    public void addEvent(CarEvent event){
+        eventList.add(event);
+    }
 
     public String getBrand() {
         return brand;
