@@ -14,6 +14,18 @@ public class Car {
         this.eventList = new ArrayList<>();
     }
 
+    public String getBrand() {
+        return brand;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public List<CarEvent> getEventList() {
+        return eventList;
+    }
+
     private void setBrand(String brand){
         if(brand.trim().isEmpty()){
             throw new NullPointerException("Invalid brand");
