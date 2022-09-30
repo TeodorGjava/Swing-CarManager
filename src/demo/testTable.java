@@ -5,6 +5,8 @@ import models.Car;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -16,6 +18,7 @@ public class testTable {
     Connection conn = DriverManager.getConnection(DB_URL, USERNAME, PASS);
     private JPanel panel1;
     private JTable test;
+    private JButton openDetails;
 
     public ArrayList<Car> getCars() {
         ArrayList<Car> list = new ArrayList<>();
@@ -54,6 +57,16 @@ public class testTable {
             model.addRow(rows);
         }
         test.setModel(model);
+        openDetails.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                try {
+                    eventsGUI.run();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
     public static void main(String[] args) throws SQLException {
