@@ -23,7 +23,7 @@ public class CarsTable extends JFrame {
         super(title);
         //close operation
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-       
+
     }
 
     public ArrayList<Car> cars() {

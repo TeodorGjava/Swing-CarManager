@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Car {
+    private static int id = 0;
     private String brand;
     private String model;
     private List<CarEvent> eventList;
@@ -11,8 +12,14 @@ public class Car {
     public Car(String brand, String model) {
         setBrand(brand);
         setModel(model);
+        id++;
         this.eventList = new ArrayList<>();
     }
+
+    public static int getId() {
+        return id;
+    }
+
     public void addEvent(CarEvent event){
         eventList.add(event);
     }
