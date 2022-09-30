@@ -1,16 +1,16 @@
 package models;
 
 public class CarEvent {
-    private int car_id;
-    private String date;
-    private String event;
-    private int mileage;
-    private String invoice;
-    private String contractor;
-    private double price;
+    private final int car_id;
+    private final String date;
+    private final String event;
+    private final int mileage;
+    private final String invoice;
+    private final String contractor;
+    private final double price;
 
-    public CarEvent(int car_id,String date, String event, int mileage, String invoice, String contractor, double price) {
-        this.car_id=car_id;
+    public CarEvent(int car_id, String date, String event, int mileage, String invoice, String contractor, double price) {
+        this.car_id = car_id;
         this.date = date;
         this.event = event;
         this.mileage = mileage;
