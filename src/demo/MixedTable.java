@@ -103,6 +103,9 @@ public class MixedTable {
             //Table displaying event info price with/without taxes completed
             model2.addRow(new Object[]{model, event, date, contractor, invoice, mileage,price,priceWithTaxes});
         }
+        //TODO: Display table with events only for selected row from main table !
+
+
         return model2;
     }
 
