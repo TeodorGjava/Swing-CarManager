@@ -8,8 +8,11 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class testTable {
 
@@ -50,14 +53,20 @@ public class testTable {
         model.addColumn("Model");
 
         ArrayList<Car> carsList = getCars();
-
-
         Object[] rows = new Object[2];
-        for (Car Car : carsList) {
-            rows[0] = Car.getBrand();
-            rows[1] = Car.getModel();
+        for (Car car : carsList) {
+            List<CarEvent> eventList = car.getEventList();
+            for (CarEvent event: eventList
+                 ) {
+
+            }
+            rows[0] = car.getBrand();
+            rows[1] = car.getModel();
             model.addRow(rows);
         }
+
+
+
         test.setModel(model);
         openDetails.addActionListener(new ActionListener() {
             @Override
@@ -66,6 +75,20 @@ public class testTable {
                     eventsGUI.run();
                 } catch (SQLException e) {
                     e.printStackTrace();
+                }
+            }
+        });
+        test.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyReleased(KeyEvent e) {
+                int column = 0;
+                int row = test.getSelectedRow();
+                String value = test.getModel().getValueAt(row, column).toString();
+                //select c.brand,c.model,e.event from cars as c join events as e on c.id=e.car_id;
+
+                if(e.getKeyCode()==KeyEvent.VK_ENTER){
+                    JFrame repairs = new JFrame("Repairs");
+
                 }
             }
         });

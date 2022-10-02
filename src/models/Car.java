@@ -16,10 +16,10 @@ public class Car {
     //    }
     //}
     private static int car_id = 0;
-    private static AtomicInteger id = new AtomicInteger(0);
+    private static final AtomicInteger id = new AtomicInteger(0);
     private String brand;
     private String model;
-    private List<CarEvent> eventList;
+    private final List<CarEvent> eventList;
 
     public Car(String brand, String model) {
         setBrand(brand);

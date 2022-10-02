@@ -27,7 +27,8 @@ public class ConverterGUI extends JFrame {
                 answer.setText(result);
             }
         });
-    convertButton.addKeyListener(new KeyAdapter() { } );input.addKeyListener(new KeyAdapter() { } );input.addKeyListener(new KeyAdapter() { } );
+    convertButton.addKeyListener(new KeyAdapter() { } )
+    ;input.addKeyListener(new KeyAdapter() { } );input.addKeyListener(new KeyAdapter() { } );
         input.addKeyListener(new KeyAdapter() {
             @Override
             public void keyReleased(KeyEvent e) {
