@@ -1,6 +1,7 @@
 package demo;
 
 import models.Car;
+import models.CarEvent;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -14,11 +15,12 @@ public class testTable {
 
     final String DB_URL = "jdbc:mysql://localhost/carbase";
     final String USERNAME = "root";
-    final String PASS = "root";
+    final String PASS = "root123";
     Connection conn = DriverManager.getConnection(DB_URL, USERNAME, PASS);
     private JPanel panel1;
     private JTable test;
     private JButton openDetails;
+
 
     public ArrayList<Car> getCars() {
         ArrayList<Car> list = new ArrayList<>();

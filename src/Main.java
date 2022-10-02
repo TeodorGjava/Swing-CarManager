@@ -9,7 +9,7 @@ import java.util.List;
 public class Main {
     final static String DB_URL = "jdbc:mysql://localhost/carbase";
     final static String USERNAME = "root";
-    final static String PASS = "root";
+    final static String PASS = "root123";
     static Connection conn;
 
     static {
@@ -29,8 +29,7 @@ public class Main {
         addCarToDatabase(car2);
         CarEvent event = new CarEvent(3, "2022/01/03", "Смяна на масло и филтри", 120445, "05143462/03/01/2022", "АЛКАРС", 965.5);
         CarEvent event2 = new CarEvent(4, "2022/06/03", "Смяна  филтри", 13512, "05143432/03/05/2022", "АЛКАРС", 975.5);
-        car2.addEvent(event);
-        car2.addEvent(event2);
+
          addEventToDatabase(event);
          addEventToDatabase(event2);
 
@@ -41,7 +40,7 @@ public class Main {
     private static void addEventToDatabase(CarEvent event) throws SQLException {
         final String DB_URL = "jdbc:mysql://localhost/carbase";
         final String USERNAME = "root";
-        final String PASS = "root";
+        final String PASS = "root123";
         Connection conn = DriverManager.getConnection(DB_URL, USERNAME, PASS);
 
         String query = "insert into events (car_id,date,event,mileage,invoice,contractor,price)" +
@@ -61,7 +60,7 @@ public class Main {
     private static void addCarToDatabase(Car car) {
         final String DB_URL = "jdbc:mysql://localhost/carbase";
         final String USERNAME = "root";
-        final String PASS = "root";
+        final String PASS = "root123";
 
         try {
             List<Car> carsList = getCars();

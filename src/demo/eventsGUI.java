@@ -14,7 +14,7 @@ public class eventsGUI {
     private JTable events;
     final String DB_URL = "jdbc:mysql://localhost/carbase";
     final String USERNAME = "root";
-    final String PASS = "root";
+    final String PASS = "root123";
     Connection conn = DriverManager.getConnection(DB_URL, USERNAME, PASS);
 
     public eventsGUI() throws SQLException {
@@ -92,6 +92,14 @@ public class eventsGUI {
             JOptionPane.showMessageDialog(null, e);
         }
         return list;
+    }
+    public static void run() throws SQLException {
+        JFrame frame = new JFrame("testTable");
+        frame.setContentPane(new eventsGUI().panel1);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
+        frame.setVisible(true);
+        frame.setSize(new Dimension(550, 550));
     }
 
     public static void main(String[] args) throws SQLException {
