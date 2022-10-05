@@ -17,14 +17,16 @@ public class Car {
     //}
     private static int car_id = 0;
     private static final AtomicInteger id = new AtomicInteger(0);
+    private int test_id;
     private String brand;
     private String model;
     private final List<CarEvent> eventList;
 
     public Car(String brand, String model) {
+        car_id = id.incrementAndGet();
+        this.test_id = car_id;
         setBrand(brand);
         setModel(model);
-        car_id = id.incrementAndGet();
         this.eventList = new ArrayList<>();
     }
 
