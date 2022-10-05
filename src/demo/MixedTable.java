@@ -6,6 +6,8 @@ import models.CarEvent;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +18,7 @@ public class MixedTable {
     private JTable events;
     final String DB_URL = "jdbc:mysql://localhost/carbase";
     final String USERNAME = "root";
-    final String PASS = "root123";
+    final String PASS = "root";
     Connection conn = DriverManager.getConnection(DB_URL, USERNAME, PASS);
 
 
@@ -25,11 +27,12 @@ public class MixedTable {
         mixedTable.setAutoCreateColumnsFromModel(true);
         mixedTable.setAutoCreateRowSorter(true);
         mixedTable.setPreferredSize(new Dimension(200, 300));
+        model.addColumn("ID");
         model.addColumn("Brand");
         model.addColumn("Model");
 
         ArrayList<Car> carsList = getCars();
-        Object[] rows = new Object[2];
+        Object[] rows = new Object[3];
         for (Car car : carsList) {
             rows[0] = car.getBrand();
             rows[1] = car.getModel();
@@ -41,43 +44,39 @@ public class MixedTable {
         events.setAutoCreateColumnsFromModel(true);
         events.setAutoCreateRowSorter(true);
         events.setPreferredSize(new Dimension(500, 500));
-        m.addColumn("Car Model");
-        m.addColumn("Car-ID");
-        m.addColumn("Date");
-        m.addColumn("Event");
-        m.addColumn("Mileage");
-        m.addColumn("Invoice");
-        m.addColumn("Contractor");
-        m.addColumn("Price");
+        m.addColumn("Автомобил");
+        m.addColumn("Събитие");
+        m.addColumn("Дата");
+        m.addColumn("Изпълнител");
+        m.addColumn("Фактура");
+        m.addColumn("Километраж");
+        m.addColumn("Цена");
+        m.addColumn("Цена с ДДС");
 
-        ArrayList<CarEvent> carEvents = getEvents();
-        Object[] rowz = new Object[8];
-        ArrayList<Car> cars = getCars();
-        for (CarEvent event : carEvents) {
-            // for (Car car : cars
-            // ) {
-            //     if (car.getId() == event.getCar_id()) {
-            //         rowz[0] = car.getModel();
-            //     }
-            // }
-            //select `event`,`date`,`contractor`,`invoice`,`mileage`,`price`as`priceBeforeTaxes`,`price`*1.2 as `fullPrice` from events where car_id = 2;
-            rowz[0] = event.getCar_id();
-            rowz[1] = event.getDate();
-            rowz[2] = event.getEvent();
-            rowz[3] = event.getMileage();
-            rowz[4] = event.getInvoice();
-            rowz[5] = event.getContractor();
-            rowz[6] = event.getPrice();
-            m.addRow(rowz);
-        }
-        events.setModel(displayTable());
+        //events.setModel(displayTable());
+        mixedTable.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                DefaultTableModel dtm = (DefaultTableModel) mixedTable.getModel();
+                int rowSelected = mixedTable.getSelectedRow();
+                String carID = String.valueOf(dtm.getValueAt(rowSelected, 1));
+                try {
+                    events.setModel(displayTable(carID));
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+
+            }
+        });
     }
 
-    public DefaultTableModel displayTable() throws SQLException {
+    public DefaultTableModel displayTable(String carModel) throws SQLException {
         //select c.model,e.event,e.date,e.contractor,e.invoice,e.mileage,e.price,
         // e.price*1.20as price_with_taxex from cars as c join events as e on c.id=e.car_id;
-        String query = "select model,event,date,contractor,invoice,mileage,price," +
-                "price*1.20as 'price_with_taxex' from cars  join events on cars.id=events.car_id;";
+        String query = "select model,event,date,contractor,invoice,mileage,price, \n" +
+                "                price*1.20as 'price_with_taxex' \n" +
+                "                from cars join events on cars.id=events.car_id\n" +
+                "                where cars.model like('" + carModel + "')";
         DefaultTableModel model2 = (DefaultTableModel) events.getModel();
 
         String model = "";
@@ -99,9 +98,9 @@ public class MixedTable {
             invoice = rs.getString("invoice");
             mileage = rs.getString("mileage");
             price = rs.getString("price");
-            priceWithTaxes = String.valueOf(Double.parseDouble(price)*1.2);
+            priceWithTaxes = String.valueOf(Double.parseDouble(price) * 1.2);
             //Table displaying event info price with/without taxes completed
-            model2.addRow(new Object[]{model, event, date, contractor, invoice, mileage,price,priceWithTaxes});
+            model2.addRow(new Object[]{model, event, date, contractor, invoice, mileage, price, priceWithTaxes});
         }
         //TODO: Display table with events only for selected row from main table !
 
