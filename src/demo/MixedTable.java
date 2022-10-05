@@ -20,7 +20,6 @@ public class MixedTable {
     final String PASS = "root123";
     Connection conn = DriverManager.getConnection(DB_URL, USERNAME, PASS);
 
-
         //TODO: Display table with events only for selected row from main table !
         //Done !
     public MixedTable() throws SQLException {
@@ -88,31 +87,22 @@ public class MixedTable {
                 "                where cars.model like('" + carModel + "')";
         DefaultTableModel model2 = (DefaultTableModel) events.getModel();
 
-        String model = "";
-        String event = "";
-        String date = "";
-        String contractor = "";
-        String invoice = "";
-        String mileage = "";
-        String price = "";
-        String priceWithTaxes = "";
-
         PreparedStatement preparedStatement = conn.prepareStatement(query);
         ResultSet rs = preparedStatement.executeQuery();
+
         while (rs.next()) {
-            model = rs.getString("model");
-            event = rs.getString("event");
-            date = rs.getString("date");
-            contractor = rs.getString("contractor");
-            invoice = rs.getString("invoice");
-            mileage = rs.getString("mileage");
-            price = rs.getString("price");
-            priceWithTaxes = String.valueOf(Double.parseDouble(price) * 1.2);
+          String model = rs.getString("model");
+          String event = rs.getString("event");
+          String date = rs.getString("date");
+          String contractor = rs.getString("contractor");
+          String invoice = rs.getString("invoice");
+          String mileage = rs.getString("mileage");
+          String price = rs.getString("price");
+
+          String priceWithTaxes = String.valueOf(Double.parseDouble(price) * 1.2);
             //Table displaying event info price with/without taxes completed
             model2.addRow(new Object[]{model, event, date, contractor, invoice, mileage, price, priceWithTaxes});
         }
-
-
         return model2;
     }
 
@@ -168,7 +158,6 @@ public class MixedTable {
         frame.setVisible(true);
         frame.setSize(new Dimension(800, 800));
     }
-
     public static void main(String[] args) throws SQLException {
         run();
     }
