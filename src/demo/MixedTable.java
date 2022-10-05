@@ -53,7 +53,6 @@ public class MixedTable {
         m.addColumn("Цена");
         m.addColumn("Цена с ДДС");
 
-        //events.setModel(displayTable());
         mixedTable.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -106,29 +105,6 @@ public class MixedTable {
         return model2;
     }
 
-    public ArrayList<CarEvent> getEvents() {
-        ArrayList<CarEvent> list = new ArrayList<>();
-        try {
-            //select `event`,`date`,`contractor`,`invoice`,`mileage`,`price`as`priceBeforeTaxes`,
-            // `price`*1.2 as `fullPrice` from events where car_id = 2;
-            String query = "select * from events";
-
-            Statement statement = conn.createStatement();
-            ResultSet resultSet = statement.executeQuery(query);
-
-            CarEvent carEvent;
-            while (resultSet.next()) {
-                carEvent = new CarEvent(resultSet.getInt("car_id"), resultSet.getString("date"),
-                        resultSet.getString("event"), resultSet.getInt("mileage"),
-                        resultSet.getString("invoice"), resultSet.getString("contractor"),
-                        resultSet.getDouble("price"));
-                list.add(carEvent);
-            }
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e);
-        }
-        return list;
-    }
 
     public ArrayList<Car> getCars() {
         ArrayList<Car> list = new ArrayList<>();
