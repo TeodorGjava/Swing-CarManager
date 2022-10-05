@@ -14,7 +14,8 @@ public class eventsGUI {
     private JTable events;
     final String DB_URL = "jdbc:mysql://localhost/carbase";
     final String USERNAME = "root";
-    final String PASS = "root123";
+   // final String PASS = "root123";
+    final String PASS = "root";
     Connection conn = DriverManager.getConnection(DB_URL, USERNAME, PASS);
 
     public eventsGUI() throws SQLException {
