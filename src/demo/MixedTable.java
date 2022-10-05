@@ -71,8 +71,7 @@ public class MixedTable {
     }
 
     public DefaultTableModel displayTable(String carModel) throws SQLException {
-        //select c.model,e.event,e.date,e.contractor,e.invoice,e.mileage,e.price,
-        // e.price*1.20as price_with_taxex from cars as c join events as e on c.id=e.car_id;
+
         String query = "select model,event,date,contractor,invoice,mileage,price, \n" +
                 "                price*1.20as 'price_with_taxex' \n" +
                 "                from cars join events on cars.id=events.car_id\n" +
